@@ -9,7 +9,7 @@ public sealed class GuardTests
     [Fact]
     public void NotNull_ArgIsNull_ThrowsException()
     {
-        object? value = null;
+        object value = null!;
 
         Assert.Throws<ArgumentNullException>(() => Guard.NotNull(value));
     }
