@@ -11,11 +11,11 @@
 		<PackageId>EK.CommonUtils</PackageId>
 		<Version>0.0.1-alpha</Version>
 		<Authors>Eryk Kisieliński</Authors>
-		<Description>???</Description>
+		<Description>Just another utility library.</Description>
 		<Copyright>© 2022 Eryk Kisieliński</Copyright>
-		<PackageLicenseUrl>???</PackageLicenseUrl>
-		<RepositoryUrl>???</RepositoryUrl>
-		<PackageTags>???</PackageTags>
+		<PackageLicenseUrl>https://github.com/ekisielinski/CommonUtils/blob/master/LICENSE</PackageLicenseUrl>
+		<RepositoryUrl>https://github.com/ekisielinski/CommonUtils</RepositoryUrl>
+		<PackageTags>utils, helpers, misc</PackageTags>
 	</PropertyGroup>
 
 </Project>
