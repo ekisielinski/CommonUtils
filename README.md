@@ -1,3 +1,3 @@
 # CommonUtils
 
-Abs...
+Just another utility library.
