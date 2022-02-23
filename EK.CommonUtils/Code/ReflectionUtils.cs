@@ -14,11 +14,11 @@ public static partial class ReflectionUtils
         return instance.GetType().GetProperties(flags).Where(x => x.CanRead).ToList();
     }
 
-    public static IReadOnlyList<PropertyValuePair> PublicInstanceGettersToString(object instance)
+    public static IReadOnlyList<PropertyValueTuple> PublicInstanceGettersToString(object instance)
     {
         Guard.NotNull(instance);
 
-        var result = new List<PropertyValuePair>();
+        var result = new List<PropertyValueTuple>();
 
         var properties = GetPublicInstanceGetters(instance);
 
@@ -36,7 +36,7 @@ public static partial class ReflectionUtils
                 exception = ex.GetType();
             }
 
-            var item = new PropertyValuePair(property.Name, propertyValue, exception);
+            var item = new PropertyValueTuple(property.Name, propertyValue, exception);
             
             result.Add(item);
         }
@@ -44,5 +44,5 @@ public static partial class ReflectionUtils
         return result;
     }
 
-    public record struct PropertyValuePair(string Property, string? Value, Type? Exception);
+    public record struct PropertyValueTuple(string Property, string? Value, Type? Exception);
 }

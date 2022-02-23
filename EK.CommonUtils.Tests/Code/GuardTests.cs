@@ -7,7 +7,7 @@ namespace EK.CommonUtils.Tests;
 public sealed class GuardTests
 {
     [Fact]
-    public void NotNull_ArgIsNull_ThrowsException()
+    public void NotNull_ArgIsNull_ThrowException()
     {
         object value = null!;
 
@@ -15,7 +15,7 @@ public sealed class GuardTests
     }
 
     [Fact]
-    public void NotNull_ArgIsString_ReturnsTheSameObject()
+    public void NotNull_ArgIsString_ReturnTheSameInstance()
     {
         string data = "test-data";
 

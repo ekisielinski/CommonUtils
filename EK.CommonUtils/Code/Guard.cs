@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+
 using CAEAttribute = System.Runtime.CompilerServices.CallerArgumentExpressionAttribute;
 
 namespace EK.CommonUtils.Code;
