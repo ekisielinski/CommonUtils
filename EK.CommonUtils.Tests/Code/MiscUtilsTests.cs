@@ -26,4 +26,33 @@ public sealed class MiscUtilsTests
 
         await MiscUtils.DelayAsync(TimeSpan.FromSeconds(10), cts.Token);
     }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData("test")]
+    [InlineData("123x")]
+    [InlineData("2147483648")] // int.MaxValue+1
+    public void TryParse_NotParsableStrings(string number)
+    {
+        int? parsed = MiscUtils.TryParse(number);
+
+        Assert.True(!parsed.HasValue);
+    }
+
+    [Theory]
+    [InlineData("-1")]
+    [InlineData("0")]
+    [InlineData("256")]
+    [InlineData("65536")]
+    [InlineData("2147483646")] // int.MaxValue
+    [InlineData(" 123 ")]
+    [InlineData(" 007 ")]
+    public void TryParse_ParsableStrings(string number)
+    {
+        int? parsed = MiscUtils.TryParse(number);
+
+        Assert.True(parsed.HasValue);
+    }
 }

@@ -18,4 +18,9 @@ public static class MiscUtils
     {
         return ch >= '0' && ch <= '9';
     }
+    
+    public static int? TryParse(string? number)
+    {
+        return int.TryParse(number, out int result) ? result : null;
+    }
 }
