@@ -2,7 +2,7 @@
 
 using CAEAttribute = System.Runtime.CompilerServices.CallerArgumentExpressionAttribute;
 
-namespace EK.CommonUtils.Code;
+namespace EK.CommonUtils;
 
 [DebuggerStepThrough]
 public static class Guard

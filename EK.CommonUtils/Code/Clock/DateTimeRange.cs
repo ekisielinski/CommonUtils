@@ -1,4 +1,4 @@
-﻿namespace EK.CommonUtils;
+﻿namespace EK.CommonUtils.Time;
 
 public sealed record DateTimeRange
 {

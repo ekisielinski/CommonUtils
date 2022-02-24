@@ -1,5 +1,4 @@
-﻿using EK.CommonUtils.Code;
-using System;
+﻿using System;
 using Xunit;
 
 namespace EK.CommonUtils.Tests;

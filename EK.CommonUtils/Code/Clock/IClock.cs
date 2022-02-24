@@ -1,4 +1,4 @@
-﻿namespace EK.CommonUtils.Code;
+﻿namespace EK.CommonUtils.Time;
 
 public interface IClock
 {
