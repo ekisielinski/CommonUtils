@@ -1,6 +1,6 @@
 ﻿namespace EK.CommonUtils.Time;
 
-public sealed record DateTimeRange
+public record struct DateTimeRange
 {
     public DateTimeRange(DateTime start, DateTime end)
     {
@@ -22,4 +22,8 @@ public sealed record DateTimeRange
 
     public DateTime Start { get; }
     public DateTime End   { get; }
+
+    //====== override: Object
+
+    public override string ToString() => $"{Start}..{End}";
 }
