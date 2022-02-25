@@ -25,5 +25,13 @@ public record struct DateTimeRange
 
     //====== override: Object
 
-    public override string ToString() => $"{Start}..{End}";
+    public override string ToString()
+    {
+        const string Format = "yyyy.MM.dd HH:mm:ss";
+
+        var strStart = Start.ToString(Format);
+        var strEnd = End.ToString(Format);
+
+        return $"{strStart} .. {strEnd}";
+    }
 }
