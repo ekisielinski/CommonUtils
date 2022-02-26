@@ -2,11 +2,11 @@
 
 public readonly record struct DataSize
 {
-    const long KiB = 1L << 10;
-    const long MiB = 1L << 20;
-    const long GiB = 1L << 30;
-    const long TiB = 1L << 40;
-    const long PiB = 1L << 50;
+    internal const long KiB = 1L << 10;
+    internal const long MiB = 1L << 20;
+    internal const long GiB = 1L << 30;
+    internal const long TiB = 1L << 40;
+    internal const long PiB = 1L << 50;
 
     //====== ctors
 
@@ -44,5 +44,17 @@ public readonly record struct DataSize
 
     //====== override: Object
 
-    public override string ToString() => Bytes + " B";
+    public override string ToString()
+    {
+        return Bytes switch
+        {
+            >= PiB => Bytes / PiB + " PiB",
+            >= TiB => Bytes / TiB + " TiB",
+            >= GiB => Bytes / GiB + " GiB",
+            >= MiB => Bytes / MiB + " MiB",
+            >= KiB => Bytes / KiB + " KiB",
+
+            _ => Bytes + " B"
+        };
+    }
 }
