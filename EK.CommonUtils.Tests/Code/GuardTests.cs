@@ -27,7 +27,7 @@ public sealed class GuardTests
     [InlineData(-1)]
     [InlineData(int.MinValue)]
     [InlineData(long.MinValue)]
-    public void NotNegative_NegativeValues(long value)
+    public void NotNegativeInt64_NegativeValues(long value)
     {
         Assert.Throws<ArgumentOutOfRangeException>(() => Guard.NotNegative(value));
     }
@@ -36,7 +36,25 @@ public sealed class GuardTests
     [InlineData(0)]
     [InlineData(int.MaxValue)]
     [InlineData(long.MaxValue)]
-    public void NotNegative_ZeroAndPositiveValues(long value)
+    public void NotNegativeInt64_ZeroAndPositiveValues(long value)
+    {
+        long result = Guard.NotNegative(value);
+
+        Assert.Equal(result, value);
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(int.MinValue)]
+    public void NotNegativeInt32_NegativeValues(int value)
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.NotNegative(value));
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(int.MaxValue)]
+    public void NotNegativeInt32_ZeroAndPositiveValues(int value)
     {
         long result = Guard.NotNegative(value);
 

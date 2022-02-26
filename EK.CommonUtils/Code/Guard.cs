@@ -16,4 +16,9 @@ public static class Guard
     {
         return value >= 0 ? value : throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, "Negative values are not allowed.");
     }
+
+    public static int NotNegative(int value, [CAE("value")] string? expr = null)
+    {
+        return value >= 0 ? value : throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, "Negative values are not allowed.");
+    }
 }
