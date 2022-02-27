@@ -11,4 +11,9 @@ public static class StringExtensions
 
         return me[..maxLength];
     }
+
+    public static string? NullIfEmpty(this string? me)
+    {
+        return me?.Length == 0 ? null : me;
+    }
 }

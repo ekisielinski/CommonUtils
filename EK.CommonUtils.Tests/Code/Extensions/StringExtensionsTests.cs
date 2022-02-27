@@ -11,10 +11,22 @@ public sealed class StringExtensionsTests
     [InlineData("empty", 0, "")]
     [InlineData("cut_me", 3, "cut")]
     [InlineData("bigMaxLength", 50, "bigMaxLength")]
-    public void Test(string current, int maxLength, string expected)
+    public void Truncate(string current, int maxLength, string expected)
     {
         string? truncated = current.Truncate(maxLength);
 
         Assert.Equal(expected, truncated);
+    }
+
+    [Theory]
+    [InlineData(null, null)]
+    [InlineData("", null)]
+    [InlineData("abc", "abc")]
+    [InlineData(" ", " ")]
+    public void NullIfEmpty(string current, string expected)
+    {
+        string? result = current.NullIfEmpty();
+
+        Assert.Equal(expected, result);
     }
 }
