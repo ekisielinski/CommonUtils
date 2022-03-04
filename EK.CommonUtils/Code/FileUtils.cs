@@ -2,21 +2,21 @@
 
 public static class FileUtils
 {
-    public static void DeleteIfExists(string filePath)
+    public static void DeleteIfExists(string path)
     {
-        Guard.NotNull(filePath);
+        Guard.NotNullOrEmpty(path);
 
-        if (File.Exists(filePath))
+        if (File.Exists(path))
         {
-            File.Delete(filePath);
+            File.Delete(path);
         }
     }
     
-    public static DataSize GetSize(string filePath)
+    public static DataSize GetSize(string path)
     {
-        Guard.NotNull(filePath);
+        Guard.NotNullOrEmpty(path);
 
-        long size = new FileInfo(filePath).Length;
+        long size = new FileInfo(path).Length;
 
         return new DataSize(size);
     }
