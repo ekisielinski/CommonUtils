@@ -12,16 +12,18 @@ public sealed class Disposable : IDisposable
     {
         this.disposeBody = Guard.NotNull(disposeBody);
     }
-    
+
     //====== IDisposable
 
     public void Dispose()
     {
-        if (isDisposed == false)
-        {
-            isDisposed = true;
+        if (isDisposed) return;
 
-            disposeBody.Invoke();
-        }
+        isDisposed = true;
+        disposeBody.Invoke();
     }
+
+    //====== public static properties
+
+    public static IDisposable Empty { get; } = new Disposable(Actions.Empty);
 }
