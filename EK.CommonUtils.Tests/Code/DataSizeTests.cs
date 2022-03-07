@@ -12,10 +12,21 @@ public sealed class DataSizeTests
     [InlineData(DataSize.GiB, "1 GiB")]
     [InlineData(DataSize.TiB, "1 TiB")]
     [InlineData(DataSize.PiB, "1 PiB")]
-    public void ToString_(long bytes, string toString)
+    public void ToString_RoundValues(long bytes, string toString)
     {
         string result = new DataSize(bytes).ToString();
 
         Assert.Equal(toString, result);
+    }
+
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(1, 1024 * 1024)]
+    [InlineData(1024, DataSize.GiB)]
+    public void FromMiB_ValidData(long megabytes, long bytesExpected)
+    {
+        var dataSize = DataSize.FromMiB(megabytes);
+
+        Assert.Equal(bytesExpected, dataSize.Bytes);
     }
 }
