@@ -23,4 +23,31 @@ public static class MiscUtils
     {
         return int.TryParse(number, out int result) ? result : null;
     }
+
+    public static bool TryCatchAction(Action method, Action<Exception> exceptionHandler)
+    {
+        Guard.NotNull(method);
+        Guard.NotNull(exceptionHandler);
+
+        try
+        {
+            method.Invoke();
+            
+            return true;
+
+        }
+        catch (Exception ex)
+        {
+            try
+            {
+                exceptionHandler(ex);
+            }
+            catch
+            {
+                // nop
+            }
+
+            return false;
+        }
+    }
 }

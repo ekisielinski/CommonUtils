@@ -55,4 +55,19 @@ public sealed class MiscUtilsTests
 
         Assert.True(parsed.HasValue);
     }
+
+    [Fact]
+    public void TryCatchAction_ThrowsException_HnadlerIsExecuted()
+    {
+        Exception? caughtException = null;
+
+        MiscUtils.TryCatchAction(() => throw new Exception("test!"), ex =>
+        {
+            caughtException = ex;
+        });
+
+        Assert.NotNull(caughtException);
+        Assert.IsType<Exception>(caughtException);
+        Assert.Equal("test!", caughtException!.Message);
+    }
 }
