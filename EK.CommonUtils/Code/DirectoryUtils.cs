@@ -2,13 +2,23 @@
 
 public static class DirectoryUtils
 {
-    public static void DeleteIfExists(string dirPath)
+    public static void DeleteIfExists(string path)
     {
-        Guard.NotNull(dirPath);
+        Guard.NotNullOrEmpty(path);
 
-        if (Directory.Exists(dirPath))
+        if (Directory.Exists(path))
         {
-            Directory.Delete(dirPath);
+            Directory.Delete(path);
+        }
+    }
+
+    public static void ThrowIfNotExists(string path, string? message = null)
+    {
+        Guard.NotNullOrEmpty(path);
+
+        if (!Directory.Exists(path))
+        {
+            throw new DirectoryNotFoundException(message);
         }
     }
 }
