@@ -22,6 +22,19 @@ public static class Guard
         return value >= 0 ? value : throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, "Negative values are not allowed.");
     }
 
+    public static int InRange(int value, int fromInclusive, int toInclusive, [CAE("value")] string? expr = null)
+    {
+        if (fromInclusive > toInclusive)
+        {
+            throw new ArgumentException(
+                $"The '{nameof(fromInclusive)}' parameter cannot be greater than the '{nameof(toInclusive)}' parameter.", nameof(fromInclusive));
+        }
+
+        if (value >= fromInclusive && value <= toInclusive) return value;
+
+        throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, $"Value is out of range [{fromInclusive}..{toInclusive}].");
+    }
+
     public static long InRange(long value, long fromInclusive, long toInclusive, [CAE("value")] string? expr = null)
     {
         if (fromInclusive > toInclusive)
