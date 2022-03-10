@@ -120,4 +120,19 @@ public static class Guard
 
         return result;
     }
+    
+    public static string StringLength(string value, int? min, int? max, [CAE("value")] string? expr = null)
+    {
+        NotNull(value, expr ?? nameof(value));
+
+        if (min > max)
+        {
+            throw new ArgumentException($"The '{nameof(min)}' parameter cannot be greater than the '{nameof(max)}' parameter.", nameof(min));
+        }
+
+        if (min.HasValue && value.Length < min) throw new ArgumentException($"Length cannot be less than {min}.", expr ?? nameof(value));
+        if (max.HasValue && value.Length > max) throw new ArgumentException($"Length cannot be greater than {max}.", expr ?? nameof(value));
+
+        return value;
+    }
 }
