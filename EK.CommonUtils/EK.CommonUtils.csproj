@@ -9,7 +9,7 @@
 	<PropertyGroup>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageId>ErK.CommonUtils</PackageId>
-		<Version>0.0.2-alpha</Version>
+		<Version>0.0.3-alpha</Version>
 		<Authors>Eryk Kisieliński</Authors>
 		<Description>Just another utility library.</Description>
 		<Copyright>© 2022 Eryk Kisieliński</Copyright>
