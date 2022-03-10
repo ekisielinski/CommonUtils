@@ -12,6 +12,8 @@ public static class Guard
         return value ?? throw new ArgumentNullException(expr ?? nameof(value));
     }
 
+    #region range
+
     public static long NotNegative(long value, [CAE("value")] string? expr = null)
     {
         return value >= 0 ? value : throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, "Negative values are not allowed.");
@@ -47,6 +49,21 @@ public static class Guard
         
         throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, $"Value is out of range [{fromInclusive}..{toInclusive}].");
     }
+
+    public static int? InRangeOrNull(int? value, int fromInclusive, int toInclusive, [CAE("value")] string? expr = null)
+    {
+        if (fromInclusive > toInclusive)
+        {
+            throw new ArgumentException(
+                $"The '{nameof(fromInclusive)}' parameter cannot be greater than the '{nameof(toInclusive)}' parameter.", nameof(fromInclusive));
+        }
+
+        if (value is null) return null;
+
+        return InRange(value.Value, fromInclusive, toInclusive, expr);
+    }
+
+    #endregion
 
     #region strings
 
