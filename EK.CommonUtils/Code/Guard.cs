@@ -26,6 +26,20 @@ public static class Guard
 
     #region range
 
+    public static int MinValue(int value, int min, [CAE("value")] string? expr = null)
+    {
+        if (value >= min) return value;
+
+        throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, $"Value cannot be less than {min}.");
+    }
+
+    public static long MinValue(long value, long min, [CAE("value")] string? expr = null)
+    {
+        if (value >= min) return value;
+
+        throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, $"Value cannot be less than {min}.");
+    }
+
     public static long NotNegative(long value, [CAE("value")] string? expr = null)
     {
         return value >= 0 ? value : throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, "Negative values are not allowed.");
