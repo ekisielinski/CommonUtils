@@ -7,10 +7,22 @@ namespace EK.CommonUtils;
 [DebuggerStepThrough]
 public static class Guard
 {
+    #region null
+
     public static T NotNull<T>(T value, [CAE("value")] string? expr = null) where T : class
     {
         return value ?? throw new ArgumentNullException(expr ?? nameof(value));
     }
+
+    public static void BothWithValueOrBothNull(object? first, object? second)
+    {
+        if (first is null && second is null) return;
+        if (first is not null && second is not null) return;
+
+        throw new ArgumentException("Both parameters must have value (not null) or both parameters must be null.");
+    }
+
+    #endregion
 
     #region range
 
