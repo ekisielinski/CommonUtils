@@ -72,7 +72,7 @@ public static class Guard
 
         if (value is null) return null;
 
-        return InRange(value.Value, fromInclusive, toInclusive, expr);
+        return InRange(value.Value, fromInclusive, toInclusive, expr ?? $"{nameof(value)}.{nameof(value.Value)}");
     }
 
     #endregion
@@ -90,4 +90,20 @@ public static class Guard
     }
 
     #endregion
+
+    public static IReadOnlyList<T> ToSnapshot<T>(IEnumerable<T> items, [CAE("items")] string? expr = null) where T : class
+    {
+        NotNull(items, expr ?? nameof(items));
+
+        var result = new List<T>();
+
+        foreach (T item in items)
+        {
+            if (item is null) throw new ArgumentException("Given enumerable contains null element.", expr ?? nameof(items));
+
+            result.Add(item);
+        }
+
+        return result;
+    }
 }
