@@ -14,7 +14,8 @@
 		<Description>Just another utility library.</Description>
 		<Copyright>© 2022 Eryk Kisieliński</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<RepositoryUrl>https://github.com/ekisielinski/CommonUtils</RepositoryUrl>
+		<RepositoryUrl>https://github.com/ekisielinski/CommonUtils.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType> 
 		<PackageTags>utils, helpers, misc</PackageTags>
 	</PropertyGroup>
 
