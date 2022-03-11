@@ -9,11 +9,12 @@
 	<PropertyGroup>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageId>ErK.CommonUtils</PackageId>
-		<Version>0.0.3-alpha</Version>
+		<Version>0.0.4-alpha</Version>
 		<Authors>Eryk Kisieliński</Authors>
 		<Description>Just another utility library.</Description>
 		<Copyright>© 2022 Eryk Kisieliński</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/ekisielinski/CommonUtils</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ekisielinski/CommonUtils.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType> 
 		<PackageTags>utils, helpers, misc</PackageTags>
