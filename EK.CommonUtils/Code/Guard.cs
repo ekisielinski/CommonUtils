@@ -102,6 +102,37 @@ public static class Guard
     {
         return !string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentException("Cannot be null or white space.", expr ?? nameof(value));
     }
+    
+    public static string StringValidChars(string value, Func<char, bool> charValidator, [CAE("value")] string? expr = null)
+    {
+        NotNull(value, expr ?? nameof(value));
+        NotNull(charValidator);
+
+        for (int i = 0; i < value.Length; i++)
+        {
+            if (!charValidator(value[i]))
+            {
+                throw new ArgumentException($"The given value contains invalid character: '{value[i]}'.");
+            }
+        }
+
+        return value;
+    }
+
+    public static string StringLength(string value, int? min, int? max, [CAE("value")] string? expr = null)
+    {
+        NotNull(value, expr ?? nameof(value));
+
+        if (min > max)
+        {
+            throw new ArgumentException($"The '{nameof(min)}' parameter cannot be greater than the '{nameof(max)}' parameter.", nameof(min));
+        }
+
+        if (min.HasValue && value.Length < min) throw new ArgumentException($"Length cannot be less than {min}.", expr ?? nameof(value));
+        if (max.HasValue && value.Length > max) throw new ArgumentException($"Length cannot be greater than {max}.", expr ?? nameof(value));
+
+        return value;
+    }
 
     #endregion
 
@@ -119,20 +150,5 @@ public static class Guard
         }
 
         return result;
-    }
-    
-    public static string StringLength(string value, int? min, int? max, [CAE("value")] string? expr = null)
-    {
-        NotNull(value, expr ?? nameof(value));
-
-        if (min > max)
-        {
-            throw new ArgumentException($"The '{nameof(min)}' parameter cannot be greater than the '{nameof(max)}' parameter.", nameof(min));
-        }
-
-        if (min.HasValue && value.Length < min) throw new ArgumentException($"Length cannot be less than {min}.", expr ?? nameof(value));
-        if (max.HasValue && value.Length > max) throw new ArgumentException($"Length cannot be greater than {max}.", expr ?? nameof(value));
-
-        return value;
     }
 }

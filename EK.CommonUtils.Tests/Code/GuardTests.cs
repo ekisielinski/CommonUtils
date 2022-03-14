@@ -5,6 +5,8 @@ namespace EK.CommonUtils.Tests;
 
 public sealed class GuardTests
 {
+    #region null
+
     [Fact]
     public void NotNull_ArgIsNull_ThrowException()
     {
@@ -12,6 +14,24 @@ public sealed class GuardTests
 
         Assert.Throws<ArgumentNullException>(() => Guard.NotNull(value));
     }
+
+    [Theory]
+    [InlineData(null, "B")]
+    [InlineData("A", null)]
+    public void BothWithValueOrBothNull_OneArgIsNull_ThrowsException(object? first, object? second)
+    {
+        Assert.Throws<ArgumentException>(() => Guard.BothWithValueOrBothNull(first, second));
+    }
+
+    [Theory]
+    [InlineData(null, null)]
+    [InlineData("A", "B")]
+    public void BothWithValueOrBothNull_ValidInput(object? first, object? second)
+    {
+        Guard.BothWithValueOrBothNull(first, second);
+    }
+
+    #endregion
 
     [Fact]
     public void NotNull_ArgIsString_ReturnTheSameInstance()
