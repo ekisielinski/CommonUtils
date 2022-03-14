@@ -80,4 +80,27 @@ public sealed class GuardTests
 
         Assert.Equal(result, value);
     }
+
+    #region strings
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    public void NotNullOrEmpty_InvalidInput_ThrowsException(string value)
+    {
+        Assert.Throws<ArgumentException>(() => Guard.NotNullOrEmpty(value));
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    [InlineData("\n")]
+    [InlineData("\t")]
+    public void NotNullOrWhitespace_InvalidInput_ThrowsException(string value)
+    {
+        Assert.Throws<ArgumentException>(() => Guard.NotNullOrWhitespace(value));
+    }
+
+    #endregion
 }
