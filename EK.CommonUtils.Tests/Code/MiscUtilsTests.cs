@@ -8,23 +8,29 @@ namespace EK.CommonUtils.Tests;
 public sealed class MiscUtilsTests
 {
     [Fact(Timeout = 500)]
-    public async Task DelayAsync_ZeroSeconds()
+    public async Task DelayAsync_ZeroSeconds_ReturnNotCancelled()
     {
-        await MiscUtils.DelayAsync(TimeSpan.FromSeconds(0), CancellationToken.None);
+        var result = await MiscUtils.DelayAsync(TimeSpan.FromSeconds(0), CancellationToken.None);
+
+        Assert.Equal(CancellableOperationResult.NotCancelled, result);
     }
 
     [Fact(Timeout = 500)]
-    public async Task DelayAsync_CancelledToken()
+    public async Task DelayAsync_CancelledToken_ReturnCancelled()
     {
-        await MiscUtils.DelayAsync(TimeSpan.FromSeconds(10), new CancellationToken(canceled: true));
+        var result = await MiscUtils.DelayAsync(TimeSpan.FromSeconds(10), new CancellationToken(canceled: true));
+
+        Assert.Equal(CancellableOperationResult.Cancelled, result);
     }
 
     [Fact(Timeout = 500)]
-    public async Task DelayAsync_CancellationTokenSourceWithTimeout()
+    public async Task DelayAsync_CancellationTokenSourceWithTimeout_ReturnCancelled()
     {
         var cts = new CancellationTokenSource(50);
 
-        await MiscUtils.DelayAsync(TimeSpan.FromSeconds(10), cts.Token);
+        var result = await MiscUtils.DelayAsync(TimeSpan.FromSeconds(10), cts.Token);
+
+        Assert.Equal(CancellableOperationResult.Cancelled, result);
     }
 
     [Theory]
