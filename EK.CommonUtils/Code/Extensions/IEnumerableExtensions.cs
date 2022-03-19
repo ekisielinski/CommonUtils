@@ -25,4 +25,14 @@ public static class IEnumerableExtensions
             method.Invoke(item, index++);
         }
     }
+
+    public static void Consume<T>(this IEnumerable<T> me)
+    {
+        Guard.NotNull(me);
+
+        foreach (var _ in me)
+        {
+            // nop
+        }
+    }
 }
