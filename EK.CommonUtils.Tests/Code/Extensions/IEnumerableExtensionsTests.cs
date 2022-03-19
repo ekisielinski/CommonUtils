@@ -33,4 +33,24 @@ public sealed class IEnumerableExtensionsTests
         Assert.Equal(0, result[0]);
         Assert.Equal(4, result[^1]);
     }
+
+    [Fact]
+    public void Consume_NonEmptyEnumerable_IteratesThroughAllElements()
+    {
+        int consumed = 0;
+
+        CreateEnumerable().Consume();
+
+        Assert.Equal(10, consumed);
+
+        IEnumerable<object?> CreateEnumerable()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                consumed++;
+
+                yield return null;
+            }
+        }
+    }
 }
