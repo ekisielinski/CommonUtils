@@ -33,4 +33,31 @@ public sealed class BitUtilsTests
 
         Assert.Equal(expected, actual);
     }
+
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(uint.MaxValue, uint.MaxValue)]
+    [InlineData(0xFF000000, 0x000000FF)]
+    [InlineData(0xAABBCCDD, 0xDDCCBBAA)]
+    [InlineData(0xA1B2C3D4, 0xD4C3B2A1)]
+    public void ReverseBytes_UInt32(uint input, uint expected)
+    {
+        uint actual = BitUtils.ReverseBytes(input);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(0, 0)]
+    [InlineData(int.MaxValue, -129)]
+    [InlineData(-1, -1)]
+    [InlineData(-256, 16777215)]
+    [InlineData(-16711936, 16711935)]
+    [InlineData(-1582119980, -725372255)]
+    public void ReverseBytes_Int32(int input, int expected)
+    {
+        int actual = BitUtils.ReverseBytes(input);
+
+        Assert.Equal(expected, actual);
+    }
 }
