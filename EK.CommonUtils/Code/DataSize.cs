@@ -32,7 +32,7 @@ public readonly record struct DataSize
 
     public static DataSize Sum(DataSize first, DataSize second)
     {
-        return new DataSize(checked(first.Bytes + second.Bytes));
+        return new(checked(first.Bytes + second.Bytes));
     }
 
     public static DataSize FromMiB(long megabytes)
@@ -41,7 +41,7 @@ public readonly record struct DataSize
 
         Guard.InRange(megabytes, 0, MaxMegabytesInInt64);
 
-        return new DataSize(megabytes * MiB);
+        return new(megabytes * MiB);
     }
 
     //====== operators
