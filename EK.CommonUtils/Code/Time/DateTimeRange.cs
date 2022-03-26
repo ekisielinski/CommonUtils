@@ -23,6 +23,8 @@ public record struct DateTimeRange
     public DateTime Start { get; }
     public DateTime End   { get; }
 
+    public DateTimeKind Kind => Start.Kind;
+
     //====== override: Object
 
     public override string ToString()

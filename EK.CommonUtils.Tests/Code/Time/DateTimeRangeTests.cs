@@ -29,4 +29,16 @@ public sealed class DateTimeRangeTests
             new DateTimeRange(now, past);
         });
     }
+
+    [Theory]
+    [InlineData(DateTimeKind.Local)]
+    [InlineData(DateTimeKind.Utc)]
+    [InlineData(DateTimeKind.Unspecified)]
+    public void Kind_DifferentKinds_KindIsValid(DateTimeKind kind)
+    {
+        var now = DateTime.SpecifyKind(DateTime.Now, kind);
+        var sut = new DateTimeRange(now, now);
+        
+        Assert.Equal(kind, sut.Kind);
+    }
 }
