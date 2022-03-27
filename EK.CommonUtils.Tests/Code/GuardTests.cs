@@ -1,4 +1,5 @@
 ﻿using System;
+using EK.CommonUtils.Time;
 using Xunit;
 
 namespace EK.CommonUtils.Tests;
@@ -100,6 +101,39 @@ public sealed class GuardTests
     public void NotNullOrWhitespace_InvalidInput_ThrowsException(string value)
     {
         Assert.Throws<ArgumentException>(() => Guard.NotNullOrWhitespace(value));
+    }
+
+    #endregion
+
+    #region time
+
+    [Theory]
+    [InlineData(DateTimeKind.Local)]
+    [InlineData(DateTimeKind.Utc)]
+    [InlineData(DateTimeKind.Unspecified)]
+    public void InUtc_DateTime_ThrowsExceptionIfNotUtc(DateTimeKind kind)
+    {
+        var sut = DateTime.SpecifyKind(DateTime.Now, kind);
+
+        if (kind != DateTimeKind.Utc)
+        {
+            Assert.Throws<ArgumentException>(() => Guard.InUtc(sut));
+        }
+    }
+
+    [Theory]
+    [InlineData(DateTimeKind.Local)]
+    [InlineData(DateTimeKind.Utc)]
+    [InlineData(DateTimeKind.Unspecified)]
+    public void InUtc_DateTimeRange_ThrowsExceptionIfNotUtc(DateTimeKind kind)
+    {
+        var now = DateTime.SpecifyKind(DateTime.Now, kind);
+        var sut = new DateTimeRange(now, now);
+
+        if (kind != DateTimeKind.Utc)
+        {
+            Assert.Throws<ArgumentException>(() => Guard.InUtc(sut));
+        }
     }
 
     #endregion

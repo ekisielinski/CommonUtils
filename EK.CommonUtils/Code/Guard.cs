@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using EK.CommonUtils.Time;
 
 using CAEAttribute = System.Runtime.CompilerServices.CallerArgumentExpressionAttribute;
 
@@ -151,4 +152,26 @@ public static class Guard
 
         return result;
     }
+
+    #region time
+    
+    public static DateTime InUtc(DateTime value, [CAE("value")] string? expr = null)
+    {
+        if (value.Kind == DateTimeKind.Utc) return value;
+
+        const string Message = $"The kind of the given 'DateTime' instance is invalid. Only UTC is allowed.";
+
+        throw new ArgumentException(Message, expr ?? nameof(value));
+    }
+    
+    public static DateTimeRange InUtc(DateTimeRange value, [CAE("value")] string? expr = null)
+    {
+        if (value.Kind == DateTimeKind.Utc) return value;
+
+        const string Message = $"The kind of the given '{nameof(DateTimeRange)}' instance is invalid. Only UTC is allowed.";
+
+        throw new ArgumentException(Message, expr ?? nameof(value));
+    }
+
+    #endregion
 }
