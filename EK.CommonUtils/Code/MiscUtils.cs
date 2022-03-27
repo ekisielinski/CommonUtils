@@ -36,7 +36,6 @@ public static class MiscUtils
             method.Invoke();
             
             return true;
-
         }
         catch (Exception ex)
         {
