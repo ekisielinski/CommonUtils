@@ -35,13 +35,13 @@ public readonly record struct DataSize
         return new(checked(first.Bytes + second.Bytes));
     }
 
-    public static DataSize FromMiB(long megabytes)
+    public static DataSize FromMiB(long mebibytes)
     {
-        const long MaxMegabytesInInt64 = long.MaxValue / MiB;
+        const long MaxMebibytesInInt64 = long.MaxValue / MiB;
 
-        Guard.InRange(megabytes, 0, MaxMegabytesInInt64);
+        Guard.InRange(mebibytes, 0, MaxMebibytesInInt64);
 
-        return new(megabytes * MiB);
+        return new(mebibytes * MiB);
     }
 
     //====== operators
