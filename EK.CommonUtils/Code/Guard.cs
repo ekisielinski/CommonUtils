@@ -15,6 +15,11 @@ public static class Guard
         return value ?? throw new ArgumentNullException(expr ?? nameof(value));
     }
 
+    public static T? NullableNotNull<T>(T? value, [CAE("value")] string? expr = null) where T : struct
+    {
+        return value ?? throw new ArgumentNullException(expr ?? nameof(value));
+    }
+
     public static void BothWithValueOrBothNull(object? first, object? second)
     {
         if (first is null && second is null) return;

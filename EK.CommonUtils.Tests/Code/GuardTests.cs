@@ -16,10 +16,26 @@ public sealed class GuardTests
         Assert.Throws<ArgumentNullException>(() => Guard.NotNull(value));
     }
 
+    [Fact]
+    public void NullableNotNull_ArgIsNull_ThrowException()
+    {
+        int? value = null;
+
+        Assert.Throws<ArgumentNullException>(() => Guard.NullableNotNull(value));
+    }
+
+    [Fact]
+    public void NullableNotNull_ArgIsNotNull_Pass()
+    {
+        int? value = 0;
+
+        Guard.NullableNotNull(value);
+    }
+
     [Theory]
     [InlineData(null, "B")]
     [InlineData("A", null)]
-    public void BothWithValueOrBothNull_OneArgIsNull_ThrowsException(object? first, object? second)
+    public void BothWithValueOrBothNull_OneArgIsNull_ThrowException(object? first, object? second)
     {
         Assert.Throws<ArgumentException>(() => Guard.BothWithValueOrBothNull(first, second));
     }
@@ -48,7 +64,7 @@ public sealed class GuardTests
     [InlineData(-1)]
     [InlineData(int.MinValue)]
     [InlineData(long.MinValue)]
-    public void NotNegativeInt64_NegativeValues(long value)
+    public void NotNegativeInt64_NegativeValues_ThrowException(long value)
     {
         Assert.Throws<ArgumentOutOfRangeException>(() => Guard.NotNegative(value));
     }
@@ -57,7 +73,7 @@ public sealed class GuardTests
     [InlineData(0)]
     [InlineData(int.MaxValue)]
     [InlineData(long.MaxValue)]
-    public void NotNegativeInt64_ZeroAndPositiveValues(long value)
+    public void NotNegativeInt64_ZeroAndPositiveValues_Pass(long value)
     {
         long result = Guard.NotNegative(value);
 
@@ -67,7 +83,7 @@ public sealed class GuardTests
     [Theory]
     [InlineData(-1)]
     [InlineData(int.MinValue)]
-    public void NotNegativeInt32_NegativeValues(int value)
+    public void NotNegativeInt32_NegativeValues_ThrowException(int value)
     {
         Assert.Throws<ArgumentOutOfRangeException>(() => Guard.NotNegative(value));
     }
@@ -75,7 +91,7 @@ public sealed class GuardTests
     [Theory]
     [InlineData(0)]
     [InlineData(int.MaxValue)]
-    public void NotNegativeInt32_ZeroAndPositiveValues(int value)
+    public void NotNegativeInt32_ZeroAndPositiveValues_Pass(int value)
     {
         long result = Guard.NotNegative(value);
 
@@ -87,7 +103,7 @@ public sealed class GuardTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    public void NotNullOrEmpty_InvalidInput_ThrowsException(string value)
+    public void NotNullOrEmpty_InvalidInput_ThrowException(string value)
     {
         Assert.Throws<ArgumentException>(() => Guard.NotNullOrEmpty(value));
     }
@@ -98,7 +114,7 @@ public sealed class GuardTests
     [InlineData(" ")]
     [InlineData("\n")]
     [InlineData("\t")]
-    public void NotNullOrWhitespace_InvalidInput_ThrowsException(string value)
+    public void NotNullOrWhitespace_InvalidInput_ThrowException(string value)
     {
         Assert.Throws<ArgumentException>(() => Guard.NotNullOrWhitespace(value));
     }
@@ -111,7 +127,7 @@ public sealed class GuardTests
     [InlineData(DateTimeKind.Local)]
     [InlineData(DateTimeKind.Utc)]
     [InlineData(DateTimeKind.Unspecified)]
-    public void InUtc_DateTime_ThrowsExceptionIfNotUtc(DateTimeKind kind)
+    public void InUtc_DateTime_ThrowExceptionIfNotUtc(DateTimeKind kind)
     {
         var sut = DateTime.SpecifyKind(DateTime.Now, kind);
 
@@ -125,7 +141,7 @@ public sealed class GuardTests
     [InlineData(DateTimeKind.Local)]
     [InlineData(DateTimeKind.Utc)]
     [InlineData(DateTimeKind.Unspecified)]
-    public void InUtc_DateTimeRange_ThrowsExceptionIfNotUtc(DateTimeKind kind)
+    public void InUtc_DateTimeRange_ThrowExceptionIfNotUtc(DateTimeKind kind)
     {
         var now = DateTime.SpecifyKind(DateTime.Now, kind);
         var sut = new DateTimeRange(now, now);
