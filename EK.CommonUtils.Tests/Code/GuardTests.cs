@@ -27,9 +27,11 @@ public sealed class GuardTests
     [Fact]
     public void NullableNotNull_ArgIsNotNull_Pass()
     {
-        int? value = 0;
+        int? value = 10;
 
-        Guard.NullableNotNull(value);
+        int? result = Guard.NullableNotNull(value);
+
+        Assert.Equal(10, result);
     }
 
     [Theory]
