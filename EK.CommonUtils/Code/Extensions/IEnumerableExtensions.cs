@@ -35,4 +35,14 @@ public static class IEnumerableExtensions
             // nop
         }
     }
+
+    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> me) where T : class
+    {
+        Guard.NotNull(me);
+
+        foreach (T? item in me)
+        {
+            if (item is not null) yield return item;
+        }
+    }
 }

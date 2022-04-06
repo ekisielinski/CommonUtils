@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using EK.CommonUtils.Extensions;
 using Xunit;
 
@@ -6,7 +7,7 @@ namespace EK.CommonUtils.Tests.Extensions;
 
 public sealed class IEnumerableExtensionsTests
 {
-    [Fact]    
+    [Fact]
     public void ForEach_WithoutIndex()
     {
         var items = new int[] { 1, 2, 3, 4, 5 };
@@ -52,5 +53,18 @@ public sealed class IEnumerableExtensionsTests
                 yield return null;
             }
         }
+    }
+
+    [Theory]
+    [InlineData(new object[]  {                  }, new object[] {          })]
+    [InlineData(new string[]  { "x"              }, new string[] { "x"      })]
+    [InlineData(new string?[] { "a",  null, "b"  }, new string[] { "a", "b" })]
+    [InlineData(new string?[] { null, null, null }, new string[] {          })]
+    [InlineData(new string?[] { null, "x",  null }, new string[] { "x"      })]
+    public void WhereNotNull(IEnumerable<object?> input, IEnumerable<object?> expected)
+    {
+        var actual = input.WhereNotNull().ToList();
+
+        Assert.True(expected.SequenceEqual(actual));
     }
 }
