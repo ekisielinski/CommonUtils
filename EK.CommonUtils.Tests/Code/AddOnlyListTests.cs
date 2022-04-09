@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -44,7 +45,6 @@ public sealed class AddOnlyListTests
         Assert.Equal(count, sut.Count);
     }
 
-
     [Fact]
     public void EnumerateCurrentState()
     {
@@ -63,5 +63,7 @@ public sealed class AddOnlyListTests
         Assert.Equal(1, state.ElementAt(0));
         Assert.Equal(2, state.ElementAt(1));
         Assert.Equal(3, state.ElementAt(2));
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => state.ElementAt(3));
     }
 }
