@@ -8,6 +8,9 @@ charset = utf-8-bom
 # Indentation and spacing
 indent_style = space
 indent_size = 4
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_after_cast=true
 
 # New line preferences
 end_of_line = crlf
@@ -20,6 +23,3 @@ dotnet_separate_import_directive_groups = false
 
 # Namespaces
 csharp_style_namespace_declarations=file_scoped:silent
-
-csharp_space_between_method_call_parameter_list_parentheses = false
-csharp_space_between_method_declaration_parameter_list_parentheses = false
