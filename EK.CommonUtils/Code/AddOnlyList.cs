@@ -81,7 +81,7 @@ public sealed class AddOnlyList<T>
 
         if (items.Length == 0)
         {
-            items = new T[DefaultCapacity];
+            items = CreateArray(DefaultCapacity);
         }
         else
         {
