@@ -153,6 +153,20 @@ public sealed class GuardTests
             Assert.Throws<ArgumentException>(() => Guard.InUtc(sut));
         }
     }
+    
+    [Fact]
+    public void NotNegative_TimeSpan()
+    {
+        var negative = TimeSpan.FromTicks(-1);
 
+        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.NotNegative(negative));
+
+        var zero = TimeSpan.Zero;
+        var positive = TimeSpan.FromTicks(1);
+
+        Guard.NotNegative(zero);
+        Guard.NotNegative(positive);
+    }
+    
     #endregion
 }

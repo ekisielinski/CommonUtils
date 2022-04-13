@@ -178,5 +178,12 @@ public static class Guard
         throw new ArgumentException(Message, expr ?? nameof(value));
     }
 
+    public static TimeSpan NotNegative(TimeSpan value, [CAE("value")] string? expr = null)
+    {
+        if (value >= TimeSpan.Zero) return value;
+
+        throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, "Negative time spans are not allowed.");
+    }
+
     #endregion
 }
