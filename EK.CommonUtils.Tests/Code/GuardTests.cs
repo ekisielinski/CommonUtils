@@ -167,6 +167,31 @@ public sealed class GuardTests
         Guard.NotNegative(zero);
         Guard.NotNegative(positive);
     }
+
+    [Theory]
+    [InlineData(-1)] // infinity
+    [InlineData(0)]
+    [InlineData(0.1)]
+    [InlineData(1)]
+    [InlineData(1000)]
+    public void Timeout_ValidInput(double milliseconds)
+    {
+        var sut = TimeSpan.FromMilliseconds(milliseconds);
+
+        Guard.Timeout(sut);
+    }
+
+    [Theory]
+    [InlineData(-0.1)]
+    [InlineData(-0.5)]
+    [InlineData(-5)]
+    [InlineData(-1000)]
+    public void Timeout_InvalidInput(double milliseconds)
+    {
+        var sut = TimeSpan.FromMilliseconds(milliseconds);
+
+        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Timeout(sut));
+    }
     
     #endregion
 }

@@ -185,5 +185,15 @@ public static class Guard
         throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, "Negative time spans are not allowed.");
     }
 
+    public static TimeSpan Timeout(TimeSpan value, [CAE("value")] string? expr = null)
+    {
+        if (value >= TimeSpan.Zero || value == System.Threading.Timeout.InfiniteTimeSpan)
+        {
+            return value;
+        }
+
+        throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, "The TimeSpan specified does not represent a valid timeout.");
+    }
+
     #endregion
 }
