@@ -76,4 +76,40 @@ public sealed class MiscUtilsTests
         Assert.IsType<Exception>(caughtException);
         Assert.Equal("test!", caughtException!.Message);
     }
+
+    [Fact]
+    public void SyncExecuteAction_SyncObjectReleased_ExecuteMethod()
+    {
+        var sync = new object();
+        var cts = new CancellationTokenSource();
+
+        bool executed = MiscUtils.SyncExecuteAction(sync, () => cts.Cancel(), Timeout.InfiniteTimeSpan);
+
+        Assert.True(cts.IsCancellationRequested);
+        Assert.True(executed);
+    }
+
+    [Fact]
+    public void SyncExecuteAction_WithTimeoutAndAcquiredSyncObject_SkipMethodExecution()
+    {
+        var sync = new object();
+        var mre = new ManualResetEvent(false);
+        var cts = new CancellationTokenSource();
+
+        Task.Run(() =>
+        {
+            lock (sync)
+            {
+                mre.Set();
+                Thread.Sleep(5000);
+            }
+        });
+
+        mre.WaitOne();
+
+        bool executed = MiscUtils.SyncExecuteAction(sync, () => cts.Cancel(), TimeSpan.FromMilliseconds(5));
+
+        Assert.False(cts.IsCancellationRequested);
+        Assert.False(executed);
+    }
 }

@@ -51,4 +51,29 @@ public static class MiscUtils
             return false;
         }
     }
+
+    public static bool SyncExecuteAction(object sync, Action method, TimeSpan timeout)
+    {
+        Guard.NotNull(sync);
+        Guard.NotNull(method);
+        Guard.Timeout(timeout);
+
+        bool lockTaken = false;
+
+        try
+        {
+            Monitor.TryEnter(sync, timeout, ref lockTaken);
+
+            if (lockTaken)
+            {
+                method.Invoke();
+            }
+
+            return lockTaken;
+        }
+        finally
+        {
+            if (lockTaken) Monitor.Exit(sync);
+        }
+    }
 }
