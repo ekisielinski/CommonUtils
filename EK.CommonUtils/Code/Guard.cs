@@ -196,4 +196,17 @@ public static class Guard
     }
 
     #endregion
+
+    #region enums
+
+    public static T EnumIsDefined<T>(T value, [CAE("value")] string? expr = null) where T : struct, Enum
+    {
+        if (Enum.IsDefined(value)) return value;
+
+        var message = $"The given enum value is not defined in the '{typeof(T).FullName}' type.";
+
+        throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, message);
+    }
+
+    #endregion
 }

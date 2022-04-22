@@ -192,6 +192,61 @@ public sealed class GuardTests
 
         Assert.Throws<ArgumentOutOfRangeException>(() => Guard.Timeout(sut));
     }
-    
+
+    #endregion
+
+    #region enums
+
+    public enum TestEnum : int
+    {
+        Zero  = 0,
+        One   = 1,
+        Three = 3,
+    }
+
+    [Theory]
+    [InlineData(TestEnum.Zero)]
+    [InlineData(TestEnum.One)]
+    [InlineData(TestEnum.Three)]
+    public void EnumIsDefined_ValidValues_Pass(TestEnum value)
+    {
+        Guard.EnumIsDefined(value);
+    }
+
+    [Theory]
+    [InlineData((TestEnum) (-1))]
+    [InlineData((TestEnum) 2)]
+    public void EnumIsDefined_InvalidValues_ThrowException(TestEnum value)
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.EnumIsDefined(value));
+    }
+
+    [Flags]
+    public enum TestFlagsEnum
+    {
+        A  = 2,
+        B  = 4,
+        AB = 6
+    }
+
+    [Theory]
+    [InlineData(TestFlagsEnum.A)]
+    [InlineData(TestFlagsEnum.B)]
+    [InlineData(TestFlagsEnum.AB)]
+    public void EnumIsDefined_Flags_ValidValues_Pass(TestFlagsEnum value)
+    {
+        Guard.EnumIsDefined(value);
+    }
+
+    [Theory]
+    [InlineData((TestFlagsEnum) (-1))]
+    [InlineData((TestFlagsEnum) 1)]
+    [InlineData((TestFlagsEnum) 3)]
+    [InlineData((TestFlagsEnum) 7)]
+    public void EnumIsDefined_Flags_InvalidValues_ThrowException(TestFlagsEnum value)
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => Guard.EnumIsDefined(value));
+    }
+
     #endregion
 }
