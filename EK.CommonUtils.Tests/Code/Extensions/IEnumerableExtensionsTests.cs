@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using EK.CommonUtils.Extensions;
 using Xunit;
@@ -67,4 +68,22 @@ public sealed class IEnumerableExtensionsTests
 
         Assert.True(expected.SequenceEqual(actual));
     }
+
+    [Theory]
+    [MemberData(nameof(WhereNullableHasValueData))]
+    public void WhereNullableHasValue(IEnumerable<int?> input, IEnumerable<int?> expected)
+    {
+        var actual = input.WhereNullableHasValue().ToList();
+
+        Assert.True(expected.SequenceEqual(actual));
+    }
+
+    public static IEnumerable<object[]> WhereNullableHasValueData => new List<object[]>
+    {
+        new object[] { new int?[] {            }, new int?[] {      } },
+        new object[] { new int?[] { null       }, new int?[] {      } },
+        new object[] { new int?[] { null, null }, new int?[] {      } },
+        new object[] { new int?[] { 1, null    }, new int?[] { 1    } },
+        new object[] { new int?[] { 1, null, 3 }, new int?[] { 1, 3 } },
+    };
 }

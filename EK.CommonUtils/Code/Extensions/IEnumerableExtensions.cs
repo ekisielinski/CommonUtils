@@ -45,4 +45,14 @@ public static class IEnumerableExtensions
             if (item is not null) yield return item;
         }
     }
+    
+    public static IEnumerable<T?> WhereNullableHasValue<T>(this IEnumerable<T?> me) where T : struct
+    {
+        Guard.NotNull(me);
+
+        foreach (T? item in me)
+        {
+            if (item.HasValue) yield return item;
+        }
+    }
 }
