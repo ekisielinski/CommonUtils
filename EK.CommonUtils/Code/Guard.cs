@@ -82,6 +82,19 @@ public static class Guard
         throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, $"Value is out of range [{fromInclusive}..{toInclusive}].");
     }
 
+    public static decimal InRange(decimal value, decimal fromInclusive, decimal toInclusive, [CAE("value")] string? expr = null)
+    {
+        if (fromInclusive > toInclusive)
+        {
+            throw new ArgumentException(
+                $"The '{nameof(fromInclusive)}' parameter cannot be greater than the '{nameof(toInclusive)}' parameter.", nameof(fromInclusive));
+        }
+
+        if (value >= fromInclusive && value <= toInclusive) return value;
+
+        throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, $"Value is out of range [{fromInclusive}..{toInclusive}].");
+    }
+
     public static int? InRangeOrNull(int? value, int fromInclusive, int toInclusive, [CAE("value")] string? expr = null)
     {
         if (fromInclusive > toInclusive)

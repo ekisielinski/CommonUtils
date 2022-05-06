@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using EK.CommonUtils.Time;
 using Xunit;
 
@@ -98,6 +99,31 @@ public sealed class GuardTests
         long result = Guard.NotNegative(value);
 
         Assert.Equal(result, value);
+    }
+
+    [Theory]
+    [MemberData(nameof(InRangeDecimalData))]
+    public void InRangeDecimal(decimal input, decimal fromInclusive, decimal toInclusive)
+    {
+        Guard.InRange(input, fromInclusive, toInclusive);
+    }
+
+    public static IEnumerable<object[]> InRangeDecimalData
+    {
+        get
+        {
+            const decimal Min = decimal.MinValue;
+            const decimal Max = decimal.MaxValue;
+
+            return new List<object[]>
+            {
+                new object[] { 0m,     0m,    0m },
+                new object[] { 0m, -1.00m, 1.00m },
+                new object[] { Max,    0m,   Max },
+                new object[] { Min,   Min,    0m },
+                new object[] { 0m,    Min,   Max },
+            };
+        }
     }
 
     #region strings
