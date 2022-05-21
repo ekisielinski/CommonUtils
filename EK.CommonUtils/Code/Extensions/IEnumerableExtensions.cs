@@ -55,4 +55,14 @@ public static class IEnumerableExtensions
             if (item.HasValue) yield return item;
         }
     }
+
+    public static List<T> EmptyIfNull<T>(this List<T>? me)
+    {
+        return me ?? new List<T>(0);
+    }
+
+    public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T>? me)
+    {
+        return me ?? Enumerable.Empty<T>();
+    }
 }
