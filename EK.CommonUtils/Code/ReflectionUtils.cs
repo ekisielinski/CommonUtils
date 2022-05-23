@@ -43,5 +43,7 @@ public static partial class ReflectionUtils
         return result;
     }
 
+    //====== structs
+
     public readonly record struct PropertyValueTuple(string Property, string? Value, Type? Exception);
 }
