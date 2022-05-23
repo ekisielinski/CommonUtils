@@ -2,11 +2,11 @@
 
 public static class MiscUtils
 {
-    public static async Task<CancellableOperationResult> DelayAsync(TimeSpan duration, CancellationToken ct)
+    public static async Task<CancellableOperationResult> DelayAsync(TimeSpan duration, CancellationToken cancellationToken)
     {
         try
         {
-            await Task.Delay(duration, ct);
+            await Task.Delay(duration, cancellationToken);
 
             return CancellableOperationResult.NotCancelled;
         }
