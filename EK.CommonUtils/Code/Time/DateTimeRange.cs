@@ -25,6 +25,18 @@ public record struct DateTimeRange
 
     public DateTimeKind Kind => Start.Kind;
 
+    //====== public methods
+
+    public bool Contains(DateTime dateTime)
+    {
+        if (dateTime.Kind == Kind) return dateTime >= Start && dateTime <= End;
+
+        throw new ArgumentException(
+            $"The '{nameof(DateTime.Kind)}' property of the given parameter must have the same value as " +
+            $"the '{nameof(DateTime.Kind)}' property of the current instance ({Kind}).",
+            nameof(dateTime));
+    }
+
     //====== override: Object
 
     public override string ToString()
