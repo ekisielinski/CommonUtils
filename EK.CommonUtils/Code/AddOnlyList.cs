@@ -22,7 +22,7 @@ public sealed class AddOnlyList<T>
 
     public int Count
     {
-        get { lock (sync) { return itemCount; } }
+        get { lock (sync) return itemCount; }
     }
 
     //====== public methods

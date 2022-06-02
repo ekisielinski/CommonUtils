@@ -23,3 +23,5 @@ dotnet_separate_import_directive_groups = false
 
 # Namespaces
 csharp_style_namespace_declarations=file_scoped:silent
+
+csharp_prefer_braces:when_multiline
