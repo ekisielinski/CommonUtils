@@ -85,7 +85,7 @@ public sealed class AddOnlyList<T>
         }
         else
         {
-            var newItems = CreateArray(CalculateNewLength());
+            T[] newItems = CreateArray(CalculateNewLength());
 
             Array.Copy(items, 0, newItems, 0, items.Length);
 
