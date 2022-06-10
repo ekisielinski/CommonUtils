@@ -4,9 +4,7 @@ public readonly record struct Duration
 {
     public Duration(TimeSpan value)
     {
-        Guard.NotNegative(value.Ticks);
-
-        Value = value;
+        Value = Guard.NotNegative(value);
     }
 
     //====== public properties
@@ -19,5 +17,10 @@ public readonly record struct Duration
 
     //====== override: Object
 
-    public override string ToString() => Value.ToString();
+    public override string ToString()
+    {
+        string format = Value.Days > 0 ? "d'd 'hh':'mm':'ss' .'fff" : "hh':'mm':'ss' .'fff";
+
+        return Value.ToString(format);
+    }
 }
