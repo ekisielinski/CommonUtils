@@ -7,7 +7,7 @@ public static class IEnumerableExtensions
         Guard.NotNull(me);
         Guard.NotNull(method);
 
-        foreach (var item in me)
+        foreach (T item in me)
         {
             method.Invoke(item);
         }
@@ -20,7 +20,7 @@ public static class IEnumerableExtensions
 
         int index = 0;
 
-        foreach (var item in me)
+        foreach (T item in me)
         {
             method.Invoke(item, index++);
         }
@@ -30,7 +30,7 @@ public static class IEnumerableExtensions
     {
         Guard.NotNull(me);
 
-        foreach (var _ in me)
+        foreach (T _ in me)
         {
             // nop
         }
