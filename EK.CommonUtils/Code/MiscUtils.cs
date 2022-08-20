@@ -52,17 +52,17 @@ public static class MiscUtils
         }
     }
 
-    public static bool SyncExecuteAction(object sync, Action method, TimeSpan timeout)
+    public static bool SyncExecuteAction(object sync, Action method, TimeSpan enterLockTimeout)
     {
         Guard.NotNull(sync);
         Guard.NotNull(method);
-        Guard.Timeout(timeout);
+        Guard.Timeout(enterLockTimeout);
 
         bool lockTaken = false;
 
         try
         {
-            Monitor.TryEnter(sync, timeout, ref lockTaken);
+            Monitor.TryEnter(sync, enterLockTimeout, ref lockTaken);
 
             if (lockTaken)
             {
