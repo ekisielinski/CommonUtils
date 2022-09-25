@@ -1,4 +1,4 @@
-﻿namespace EK.CommonUtils.Tests.Time;
+﻿namespace EK.CommonUtils.Time;
 
 public readonly record struct Duration
 {
