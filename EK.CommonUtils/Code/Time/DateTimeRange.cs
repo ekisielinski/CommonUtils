@@ -46,6 +46,6 @@ public record struct DateTimeRange
         var strStart = Start.ToString(Format);
         var strEnd = End.ToString(Format);
 
-        return $"{strStart} .. {strEnd}";
+        return $"{strStart} .. {strEnd} | {Kind}";
     }
 }
