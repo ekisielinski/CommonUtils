@@ -1,6 +1,6 @@
 ﻿namespace EK.CommonUtils.Time;
 
-public sealed class SystemClock : IClock
+public sealed class SystemClock : ISystemClock
 {
     public DateTime UtcNow => DateTime.UtcNow;
 }
