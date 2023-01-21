@@ -2,6 +2,11 @@
 
 public static class IEnumerableExtensions
 {
+    public static IEnumerable<T?> Yield<T>(this T? instance)
+    {
+        yield return instance;
+    }
+
     public static void ForEach<T>(this IEnumerable<T> me, Action<T> method)
     {
         Guard.NotNull(me);

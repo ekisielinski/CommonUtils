@@ -9,6 +9,42 @@ namespace EK.CommonUtils.Tests.Extensions;
 public sealed class IEnumerableExtensionsTests
 {
     [Fact]
+    public void Yield_OnString()
+    {
+        var str = "test";
+
+        var enumerable = str.Yield();
+
+        Assert.NotNull(enumerable);
+        Assert.Single(enumerable);
+        Assert.True(ReferenceEquals(enumerable.ElementAt(0), str));
+    }
+
+    [Fact]
+    public void Yield_OnNullObject()
+    {
+        object? obj = null;
+
+        var enumerable = obj.Yield();
+
+        Assert.NotNull(enumerable);
+        Assert.Single(enumerable);
+        Assert.True(ReferenceEquals(enumerable.ElementAt(0), obj));
+    }
+
+    [Fact]
+    public void Yield_OnInt32Struct()
+    {
+        int value = 20;
+
+        var enumerable = value.Yield();
+
+        Assert.NotNull(enumerable);
+        Assert.Single(enumerable);
+        Assert.True(enumerable.ElementAt(0) == value);
+    }
+
+    [Fact]
     public void ForEach_WithoutIndex()
     {
         var items = new int[] { 1, 2, 3, 4, 5 };
