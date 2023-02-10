@@ -11,7 +11,17 @@ public static class FileUtils
             File.Delete(path);
         }
     }
-    
+
+    public static void DeleteIfEmpty(string path)
+    {
+        Guard.NotNullOrEmpty(path);
+
+        if (File.Exists(path) && GetSize(path) == 0L)
+        {
+            File.Delete(path);
+        }
+    }
+
     public static DataSize GetSize(string path)
     {
         Guard.NotNullOrEmpty(path);
