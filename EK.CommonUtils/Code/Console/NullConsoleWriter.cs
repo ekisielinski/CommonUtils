@@ -1,5 +1,8 @@
-﻿namespace EK.CommonUtils.Console;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace EK.CommonUtils.Console;
+
+[ExcludeFromCodeCoverage]
 public sealed class NullConsoleWriter : IConsoleWriter
 {
     private NullConsoleWriter() { }
@@ -18,5 +21,5 @@ public sealed class NullConsoleWriter : IConsoleWriter
 
     //====== public static properties
 
-    public static NullConsoleWriter Instance { get; } = new NullConsoleWriter();
+    public static NullConsoleWriter Instance { get; } = new();
 }
