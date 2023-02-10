@@ -1,6 +1,6 @@
 ﻿namespace EK.CommonUtils.Time;
 
-public record struct DateTimeRange
+public readonly record struct DateTimeRange
 {
     public DateTimeRange(DateTime start, DateTime end)
     {
