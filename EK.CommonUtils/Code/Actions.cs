@@ -1,5 +1,8 @@
-﻿namespace EK.CommonUtils;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace EK.CommonUtils;
+
+[ExcludeFromCodeCoverage]
 public static class Actions
 {
     public static void Empty() { }
