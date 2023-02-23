@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using EK.CommonUtils.Time;
 using Xunit;
 
 namespace EK.CommonUtils.Tests;
@@ -10,7 +11,7 @@ public sealed class MiscUtilsTests
     [Fact(Timeout = 500)]
     public async Task DelayAsync_ZeroSeconds_ReturnNotCancelled()
     {
-        var result = await MiscUtils.DelayAsync(TimeSpan.FromSeconds(0), CancellationToken.None);
+        var result = await MiscUtils.DelayAsync(Duration.Zero, CancellationToken.None);
 
         Assert.Equal(CancellableOperationResult.NotCancelled, result);
     }
@@ -18,7 +19,7 @@ public sealed class MiscUtilsTests
     [Fact(Timeout = 500)]
     public async Task DelayAsync_CancelledToken_ReturnCancelled()
     {
-        var result = await MiscUtils.DelayAsync(TimeSpan.FromSeconds(10), new CancellationToken(canceled: true));
+        var result = await MiscUtils.DelayAsync(new(TimeSpan.FromSeconds(10)), new CancellationToken(canceled: true));
 
         Assert.Equal(CancellableOperationResult.Cancelled, result);
     }
@@ -28,7 +29,7 @@ public sealed class MiscUtilsTests
     {
         var cts = new CancellationTokenSource(50);
 
-        var result = await MiscUtils.DelayAsync(TimeSpan.FromSeconds(10), cts.Token);
+        var result = await MiscUtils.DelayAsync(new(TimeSpan.FromSeconds(10)), cts.Token);
 
         Assert.Equal(CancellableOperationResult.Cancelled, result);
     }

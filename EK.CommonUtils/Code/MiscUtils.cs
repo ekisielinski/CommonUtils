@@ -1,12 +1,14 @@
-﻿namespace EK.CommonUtils;
+﻿using EK.CommonUtils.Time;
+
+namespace EK.CommonUtils;
 
 public static class MiscUtils
 {
-    public static async Task<CancellableOperationResult> DelayAsync(TimeSpan duration, CancellationToken cancellationToken)
+    public static async Task<CancellableOperationResult> DelayAsync(Duration duration, CancellationToken cancellationToken)
     {
         try
         {
-            await Task.Delay(duration, cancellationToken);
+            await Task.Delay(duration.Value, cancellationToken);
 
             return CancellableOperationResult.NotCancelled;
         }
