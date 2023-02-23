@@ -131,7 +131,7 @@ public static class Guard
         {
             if (!charValidator(value[i]))
             {
-                throw new ArgumentException($"The given value contains invalid character: '{value[i]}'.");
+                throw new ArgumentException($"The given value contains invalid character: '{value[i]}' (at position: {i}).");
             }
         }
 
@@ -155,6 +155,8 @@ public static class Guard
 
     #endregion
 
+    #region list
+
     public static IReadOnlyList<T> ToSnapshot<T>(IEnumerable<T> items, [CAE("items")] string? expr = null) where T : class
     {
         NotNull(items, expr ?? nameof(items));
@@ -171,13 +173,15 @@ public static class Guard
         return result;
     }
 
+    #endregion
+
     #region time
-    
+
     public static DateTime InUtc(DateTime value, [CAE("value")] string? expr = null)
     {
         if (value.Kind == DateTimeKind.Utc) return value;
 
-        const string Message = $"The kind of the given 'DateTime' instance is invalid. Only UTC is allowed.";
+        const string Message = $"The kind of the given {nameof(DateTime)} instance is invalid. Only UTC is allowed.";
 
         throw new ArgumentException(Message, expr ?? nameof(value));
     }
@@ -186,7 +190,7 @@ public static class Guard
     {
         if (value.Kind == DateTimeKind.Utc) return value;
 
-        const string Message = $"The kind of the given '{nameof(DateTimeRange)}' instance is invalid. Only UTC is allowed.";
+        const string Message = $"The kind of the given {nameof(DateTimeRange)} instance is invalid. Only UTC is allowed.";
 
         throw new ArgumentException(Message, expr ?? nameof(value));
     }
@@ -205,7 +209,9 @@ public static class Guard
             return value;
         }
 
-        throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, "The TimeSpan specified does not represent a valid timeout.");
+        const string Message = $"The given {nameof(TimeSpan)} does not represent a valid timeout.";
+
+        throw new ArgumentOutOfRangeException(expr ?? nameof(value), value, Message);
     }
 
     #endregion
