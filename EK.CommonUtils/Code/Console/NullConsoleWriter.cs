@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace EK.CommonUtils.Console;
+﻿namespace EK.CommonUtils.Console;
 
 public sealed class NullConsoleWriter : IConsoleWriter
 {
