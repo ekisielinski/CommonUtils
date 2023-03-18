@@ -85,7 +85,14 @@ public sealed class AddOnlyList<T>
         }
         else
         {
-            T[] newItems = CreateArray(CalculateNewLength());
+            int newLength = CalculateNewLength();
+
+            if (items.Length == newLength)
+            {
+                throw new InvalidOperationException("Unable to add more items. The size limit has been reached.");
+            }
+
+            T[] newItems = CreateArray(newLength);
 
             Array.Copy(items, 0, newItems, 0, items.Length);
 
