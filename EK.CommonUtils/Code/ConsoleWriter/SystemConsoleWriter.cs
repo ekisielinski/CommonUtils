@@ -1,14 +1,14 @@
-﻿namespace EK.CommonUtils.Console;
+﻿namespace EK.CommonUtils.ConsoleWriter;
 
 public sealed class SystemConsoleWriter : IConsoleWriter
 {
     public void Write(string? value)
     {
-        System.Console.Write(value);
+        Console.Write(value);
     }
 
     public void WriteLine(string? value)
     {
-        System.Console.WriteLine(value);
+        Console.WriteLine(value);
     }
 }

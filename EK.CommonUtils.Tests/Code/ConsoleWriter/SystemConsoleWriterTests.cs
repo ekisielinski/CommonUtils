@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
-using EK.CommonUtils.Console;
+using EK.CommonUtils.ConsoleWriter;
 using Xunit;
 
-namespace EK.CommonUtils.Tests.Console;
+namespace EK.CommonUtils.Tests.ConsoleWriter;
 
 public sealed class SystemConsoleWriterTests
 {
@@ -16,7 +16,7 @@ public sealed class SystemConsoleWriterTests
     {
         // arrange
         using var writer = new StringWriter();
-        System.Console.SetOut(writer);
+        Console.SetOut(writer);
 
         // act
         var sut = new SystemConsoleWriter();
@@ -36,7 +36,7 @@ public sealed class SystemConsoleWriterTests
     {
         // arrange
         using var writer = new StringWriter();
-        System.Console.SetOut(writer);
+        Console.SetOut(writer);
 
         // act
         var sut = new SystemConsoleWriter();

@@ -1,7 +1,7 @@
-﻿using EK.CommonUtils.Console;
+﻿using EK.CommonUtils.ConsoleWriter;
 using Xunit;
 
-namespace EK.CommonUtils.Tests.Console;
+namespace EK.CommonUtils.Tests.ConsoleWriter;
 
 public sealed class NullConsoleWriterTests
 {

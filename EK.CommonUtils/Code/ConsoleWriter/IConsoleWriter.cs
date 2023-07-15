@@ -1,4 +1,4 @@
-﻿namespace EK.CommonUtils.Console;
+﻿namespace EK.CommonUtils.ConsoleWriter;
 
 public interface IConsoleWriter
 {

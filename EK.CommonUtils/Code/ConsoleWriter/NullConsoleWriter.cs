@@ -1,4 +1,4 @@
-﻿namespace EK.CommonUtils.Console;
+﻿namespace EK.CommonUtils.ConsoleWriter;
 
 public sealed class NullConsoleWriter : IConsoleWriter
 {
